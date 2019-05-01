@@ -665,11 +665,11 @@ def export_data_file(activity_id, activity_details, args, file_time, append_desc
     elif args.format == 'original':
         data_filename = directory + '/' + prefix + 'activity_' + activity_id + append_desc + '.zip'
         # TODO not all 'original' files are in FIT format, some are GPX or TCX...
-        fit_filename = directory + '/' + prefix + '/activity_' + activity_id + append_desc + '.fit'
+        fit_filename = directory + '/' + prefix + 'activity_' + activity_id + append_desc + '.fit'
         download_url = URL_GC_ORIGINAL_ACTIVITY + activity_id
         file_mode = 'wb'
     elif args.format == 'json':
-        data_filename = directory + '/' + prefix +'activity_' + activity_id + append_desc + '.json'
+        data_filename = directory + '/' + prefix + 'activity_' + activity_id + append_desc + '.json'
         file_mode = 'w'
     else:
         raise Exception('Unrecognized format.')
