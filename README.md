@@ -1,13 +1,13 @@
-//////////////////////////////
+#############################################################################
 
 This repository is forked from pe-st and has some additional features. Maybe this repository will be merged with pe-st one's.
 Additional features:
-- argument 'count' supports parameter 'new'
-- Support for debian based distributions (Needs python 2.7). Call two scripts to make the deb package and install it on your system:
-  .make_deb
-  .install
+* argument 'count' supports parameter 'new'
+* Support for debian based distributions (Needs python 2.7). Call two scripts to make the deb package and install it on your system:
+* .make_deb
+* .install
   
-//////////////////////////////
+#############################################################################
 
 garmin-connect-export
 =====================
