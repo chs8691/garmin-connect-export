@@ -1,0 +1,4 @@
+rsync -rltv --delete --info=FLIST0,STATS0,BACKUP1 gcexport.py dist/debian/usr/lib/garmin-connect-export/
+rsync -rltv --delete --info=FLIST0,STATS0,BACKUP1 csv_header_default.properties dist/debian/usr/lib/garmin-connect-export/
+dpkg-deb --build dist/debian/
+mv -v dist/debian.deb dist/garmin-connect-export_2.3.0_all.deb

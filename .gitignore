@@ -1,6 +1,9 @@
 .pytest_cache/
 __pycache__/
 .idea/
+downloads/
+.directory
+venv/
 .DS_Store
 extras/
 *_garmin_connect_export/

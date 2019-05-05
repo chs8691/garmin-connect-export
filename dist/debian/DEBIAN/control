@@ -1,0 +1,9 @@
+Package: garmin-connect-export
+Version: 2.3.0
+Section: base
+Priority: optional
+Architecture: all
+Depends: python2.7-minimal
+Maintainer: Christian Schulzendorff <chs8691@mailbox.org>
+Description: Download a copy of your Garmin Connect data, including stats and GPX tracks.
+ This script will backup your personal Garmin Connect data. All downloaded data will go into a directory called YYYY-MM-DD_garmin_connect_export/ in the current working directory. Activity records and details will go into a CSV file called activities.csv. GPX files (or whatever format you specify) containing track data, activity title, and activity descriptions are saved as well, using the Activity ID.
