@@ -1,7 +1,20 @@
+#############################################################################
+
+This repository is forked from pe-st and has some additional features. Maybe this repository will be merged with pe-st one's.
+Additional features:
+* argument 'count' supports parameter 'new'
+* Support for debian based distributions (Needs python 2.7). Call two scripts to make the deb package and install it on your system:
+* .make_deb
+* .install
+  
+#############################################################################
+
 garmin-connect-export
 =====================
 
 Download a copy of your Garmin Connect data, including stats and GPX tracks.
+
+
 
 Note that Garmin introduced recently (around May 2018, for GDPR compatibility) a possibility to [download all of your Garmin Connect data](https://www.garmin.com/en-US/account/datamanagement/exportdata/) in one zip file. Depending on your needs this might be enough, but the script here offers additional features like getting GPX tracks instead of the original upload format or limiting the export to just a couple of activities.
 
