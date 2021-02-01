@@ -6,6 +6,7 @@ downloads/
 venv/
 .DS_Store
 extras/
+venv/
 *_garmin_connect_export/
 *.pyc
 *.log

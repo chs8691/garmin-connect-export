@@ -6,7 +6,12 @@ py.test gcexport_test.py
 """
 
 from gcexport import *
-from StringIO import StringIO
+try:
+    ## for Python 2
+    from StringIO import StringIO
+except ImportError:
+    ## for Python 3
+    from io import StringIO
 
 
 def test_pace_or_speed_raw_cycling():
@@ -57,8 +62,8 @@ def test_load_properties_keys():
     csv_columns = []
     csv_headers = load_properties(csv_header_props, keys=csv_columns)
 
-    assert csv_columns[0] == 'activityName'
-    assert csv_headers['activityName'] == "Activity name"
+    assert csv_columns[0] == 'startTimeIso'
+    assert csv_headers['startTimeIso'] == "Start Time"
 
 
 def test_csv_write_record():
@@ -80,11 +85,13 @@ def test_csv_write_record():
     extract['elapsed_seconds'] = 42
     extract['samples'] = None
     extract['device'] = "some device"
+    extract['gear'] = "some gear"
 
     csv_file = StringIO()
     csv_filter = CsvFilter(csv_file, 'csv_header_default.properties')
     csv_write_record(csv_filter, extract, activities[0], details, activity_type_name, event_type_name)
-    assert csv_file.getvalue()[:20] == '"Biel 🏛 Pavillon"'
+    expected = '"Biel 🏛 Pavillon"'
+    assert csv_file.getvalue()[69:69 + len(expected)] == expected
 
 
 def write_to_file_mock(filename, content, mode, file_time=None):
@@ -101,7 +108,7 @@ def test_extract_device():
 
     with open('json/activity_2541953812.json') as json_detail:
         details = json.load(json_detail)
-    assert 'fēnix 5 10.0.0.0' == extract_device({}, details, None, args, http_req_mock, write_to_file_mock).encode('utf8')
+    assert u'fēnix 5 10.0.0.0' == extract_device({}, details, None, args, http_req_mock, write_to_file_mock)
 
     with open('json/activity_154105348_gpx_device_null.json') as json_detail:
         details = json.load(json_detail)
@@ -110,3 +117,12 @@ def test_extract_device():
     with open('json/activity_995784118_gpx_device_0.json') as json_detail:
         details = json.load(json_detail)
     assert None == extract_device({}, details, None, args, http_req_mock, write_to_file_mock)
+
+
+def test_resolve_path():
+    assert resolve_path('root', 'sub/{YYYY}', '2018-03-08 12:23:22') == 'root/sub/2018'
+    assert resolve_path('root', 'sub/{MM}', '2018-03-08 12:23:22') == 'root/sub/03'
+    assert resolve_path('root', 'sub/{YYYY}/{MM}', '2018-03-08 12:23:22') == 'root/sub/2018/03'
+    assert resolve_path('root', 'sub/{yyyy}', '2018-03-08 12:23:22') == 'root/sub/{yyyy}'
+    assert resolve_path('root', 'sub/{YYYYMM}', '2018-03-08 12:23:22') == 'root/sub/{YYYYMM}'
+    assert resolve_path('root', 'sub/all', '2018-03-08 12:23:22') == 'root/sub/all'
